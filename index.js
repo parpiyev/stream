@@ -2,11 +2,11 @@ const express = require("express");
 const fs = require("fs");
 const app = express();
 
-app.get("/", function (req, res) {
+app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/video", function (req, res) {
+app.get("/video", (req, res) => {
     // Ensure there is a range given for the video
     const range = req.headers.range;
     if (!range) {
@@ -42,6 +42,8 @@ app.get("/video", function (req, res) {
     videoStream.pipe(res);
 });
 
-app.listen(8000, function () {
+const port = process.env.PORT || 3000
+
+app.listen(port, () => {
     console.log("Listening on port 8000!");
 });
